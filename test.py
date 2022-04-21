@@ -1,2 +1,3 @@
 import numpy as np
-print("A")
+a=int(input())
+print(a)
