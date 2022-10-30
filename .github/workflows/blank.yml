@@ -4,24 +4,30 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ "master" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  workflow_dispatch: 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  HTMLCHECK:
     runs-on: ubuntu-latest
     steps:
-    
-      - name: HTML5 Validator
-        uses: Cyb3r-Jak3/html5validator-action@v7.1.1
-        with:
+    - run: lsb_release -a
+    - run: uname -a
+    - uses: actions/checkout@v3
+    - name: HTML5Validator
+      uses: Cyb3r-Jak3/html5validator-action@v7.1.1
+      with:
           root: src/
+          log_level: INFO
+          css: true
+    - uses: actions/upload-artifact@v3
+      with:
+          name: log
+          path: log.log
