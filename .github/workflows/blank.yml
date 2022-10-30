@@ -18,16 +18,9 @@ jobs:
   HTMLCHECK:
     runs-on: ubuntu-latest
     steps:
-    - run: lsb_release -a
-    - run: uname -a
-    - uses: actions/checkout@v3
     - name: HTML5Validator
       uses: Cyb3r-Jak3/html5validator-action@v7.1.1
       with:
           root: src/
           log_level: INFO
           css: true
-    - uses: actions/upload-artifact@v3
-      with:
-          name: log
-          path: log.log
