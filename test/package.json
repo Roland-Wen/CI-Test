@@ -1,0 +1,6 @@
+{
+  "name": "first test",
+  "jest": {
+    "verbose": true
+  }
+}
