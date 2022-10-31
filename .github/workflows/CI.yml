@@ -13,29 +13,39 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # Validate HTML/CSS in src/
-  HTMLCheck:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - run: uname -a
-    - uses: actions/checkout@v3
-    - name: HTML5Validator
-      uses: Cyb3r-Jak3/html5validator-action@v7.1.1
-      with:
-          root: src/
-          log_level: INFO
-          css: true
-  
-  # Run unit tests with jest
-  JSCheck:
-    # Must pass HTMLCheck before testing js
-    needs: HTMLCheck
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Test using Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      # Use cache to speed up
+
+      - name: Cache node modules
+        id: cache-yarn
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
         with:
-          node-version: '18.12.0'
-      - run: yarn add --dev jest
-      - run: yarn test
+          # npm cache files are stored in `~/.yarn` on Linux/macOS
+          path: ~/.yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install jest
+        run: yarn add --dev jest
+
+      # Validate HTML/CSS in src/
+      - name: HTMLCheck
+        run: uname -a
+      - name: HTML5Validator
+        uses: Cyb3r-Jak3/html5validator-action@v7.1.1
+        with:
+            root: src/
+            log_level: INFO
+            css: true
+
+      # Run unit tests with jest
+      - name: JSCheck
+        # Must pass HTMLCheck before testing js
+        run: yarn test
