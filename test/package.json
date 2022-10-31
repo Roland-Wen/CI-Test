@@ -1,6 +1,5 @@
 {
-  "name": "first test",
-  "jest": {
-    "verbose": true
+  "scripts": {
+    "test": "jest"
   }
 }
