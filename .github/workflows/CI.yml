@@ -28,6 +28,8 @@ jobs:
   
   # Run unit tests with jest
   JSCheck:
+    # Must pass HTMLCheck before testing js
+    needs: HTMLCheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
