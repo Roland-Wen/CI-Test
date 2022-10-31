@@ -23,5 +23,5 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12'
-      - run: npm init
+      - working-directory: ./test
       - run: npm test
