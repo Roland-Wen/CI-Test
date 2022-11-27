@@ -15,10 +15,7 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - name: Install jest
-        run: npm install --save-dev jest
-
-
+          
       # Run unit tests with jest
       - name: JSCheck
         run: npm test
