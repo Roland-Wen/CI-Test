@@ -21,7 +21,7 @@ jobs:
         run: |
              npm install
              cd ./node_modules/puppeteer
-             npm run install
+             npm install
 
       - name: JSCheck
         run: npm test
