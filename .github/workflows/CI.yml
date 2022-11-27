@@ -17,11 +17,10 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/npm.lock') }}
 
-      - name: tree
-        run: tree
-        
       - name: Install packages
         run: npm install
+             cd ./node_modules/puppeteer
+             npm run install
 
       - name: JSCheck
         run: npm test
