@@ -13,5 +13,5 @@ test("Testing -5 + 3 = -2", () => {
 });
 
 test("new", () => {
-    expect(add(8, 7)).toBe(15);
+    expect(add(8, 8)).toBe(16);
 });
