@@ -20,8 +20,8 @@ jobs:
       - name: Install packages
         run: |
              npm install
-             cd ./node_modules/puppeteer
-             npm install
+             #cd ./node_modules/puppeteer
+             #npm install
 
       - name: JSCheck
         run: npm test
