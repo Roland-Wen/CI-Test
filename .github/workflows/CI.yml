@@ -12,20 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/npm.lock') }}
+      #- uses: actions/cache@v2
+      #  with:
+      #    path: '**/node_modules'
+      #    key: ${{ runner.os }}-modules-${{ hashFiles('**/npm.lock') }}
 
-      - name: Install packages
-        run: npm install
+      #- name: Install packages
+      #  run: npm install
 
-      - name: JSCheck
-        run: npm test
+      #- name: JSCheck
+      #  run: npm test
         
       - name: Build
         uses: andstor/jsdoc-action@v1
         with:
           source_dir: ./src
           output_dir: ./out
-          front_page: README.md
