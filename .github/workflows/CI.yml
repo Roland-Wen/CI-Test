@@ -24,7 +24,7 @@ jobs:
       #  run: npm test
         
       - name: Build
-        uses: andstor/jsdoc-action@v1
+        uses: andstor/jsdoc-action@v1.2.1
         with:
           source_dir: ./src
           output_dir: ./out
