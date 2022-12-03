@@ -18,10 +18,20 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/npm.lock') }}
 
       - name: Install packages
-        run: |
-             npm install
-             #cd ./node_modules/puppeteer
-             #npm install
+        run: npm install
 
       - name: JSCheck
         run: npm test
+        
+      - name: Build
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: ./src
+          output_dir: ./out
+          front_page: README.md
+          
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./out
