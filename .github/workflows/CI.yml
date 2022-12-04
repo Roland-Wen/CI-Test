@@ -33,4 +33,3 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./out
           destination_dir: ./JSDoc
-          publish_branch: master
